@@ -1,4 +1,5 @@
-/* Importando fontes temáticas do Google Fonts */
+/* style.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merriweather:ital,wght@0,300;1,300&display=swap');
 
 :root {
@@ -19,7 +20,7 @@ body, html {
     width: 100%;
     overflow: hidden;
     background-color: var(--dark-bg);
-    font-family: 'Merriweather', serif; /* Fonte Literária */
+    font-family: 'Merriweather', serif;
 }
 
 #canvas-magic {
@@ -37,19 +38,38 @@ body, html {
     z-index: 10;
     text-align: center;
     color: #ecf0f1;
-    width: 80%;
+    width: 90%; /* Aumenta a largura máxima para se adaptar melhor */
     max-width: 800px;
-    pointer-events: none; /* Permite clicar no canvas através do texto */
+    pointer-events: none;
 }
 
 h1 {
-    font-family: 'Cinzel', serif; /* Estilo Harry Potter */
+    font-family: 'Cinzel', serif;
     font-size: 4rem;
     color: var(--hp-gold);
-    text-shadow: 0 0 10px rgba(241, 196, 15, 0.5), 0 0 20px rgba(241, 196, 15, 0.3);
     margin-bottom: 20px;
     letter-spacing: 2px;
-    animation: floatText 3s ease-in-out infinite;
+    
+    animation: 
+        floatText 3s ease-in-out infinite,
+        glowPulse 2s ease-in-out infinite alternate, 
+        rainbowFill 8s linear infinite, 
+        subtleShake 0.5s ease-in-out infinite alternate;
+    
+    background: linear-gradient(90deg, var(--hp-gold), var(--magic-purple), var(--bio-green), var(--hp-gold));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.anniversary-date {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--bio-green);
+    margin-top: -10px; 
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
 }
 
 .message {
@@ -82,70 +102,45 @@ h1 {
     font-style: italic;
 }
 
-/* Animação de flutuação do título */
+/* Keyframes (permanecem os mesmos) */
 @keyframes floatText {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
 
-/* Responsividade */
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 10px var(--hp-gold), 0 0 20px var(--hp-gold), 0 0 30px rgba(241, 196, 15, 0.7);
+    }
+    100% {
+        text-shadow: 0 0 5px var(--hp-gold), 0 0 15px rgba(241, 196, 15, 0.5), 0 0 25px rgba(241, 196, 15, 0.3);
+    }
+}
+
+@keyframes rainbowFill {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@keyframes subtleShake {
+    0% { transform: translate(0px, 0px) rotate(0deg) translateY(0); }
+    25% { transform: translate(1px, 0px) rotate(-0.5deg) translateY(-2px); }
+    50% { transform: translate(-1px, 1px) rotate(0.5deg) translateY(-4px); }
+    75% { transform: translate(1px, -1px) rotate(-0.5deg) translateY(-2px); }
+    100% { transform: translate(-1px, 0px) rotate(0deg) translateY(0); }
+}
+
+/* MEDIA QUERIES APRIMORADAS PARA RESPONSIVIDADE */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .message { font-size: 1rem; padding: 1rem; }
+    h1 { font-size: 2.8rem; }
+    .anniversary-date { font-size: 1.4rem; }
+    .message { font-size: 1.1rem; padding: 1.5rem; }
 }
 
-/* style.css */
-
-/* Importando fontes temáticas do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merriweather:ital,wght@0,300;1,300&display=swap');
-
-:root {
-    --hp-gold: #f1c40f;
-    --bio-green: #2ecc71;
-    --magic-purple: #9b59b6;
-    --dark-bg: #0f0f1a;
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; letter-spacing: 1px; }
+    .anniversary-date { font-size: 1.2rem; margin-bottom: 15px; }
+    .message { font-size: 0.9rem; padding: 1rem; width: 95%; }
+    .footer-hint { font-size: 0.8rem; }
 }
-
-/* ... (O restante do CSS Body, Canvas, Content permanece o mesmo) ... */
-
-h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 4rem;
-    color: var(--hp-gold);
-    
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    
-    animation: 
-        floatText 3s ease-in-out infinite,
-        glowPulse 2s ease-in-out infinite alternate, 
-        rainbowFill 8s linear infinite, 
-        subtleShake 0.5s ease-in-out infinite alternate;
-    
-    background: linear-gradient(90deg, var(--hp-gold), var(--magic-purple), var(--bio-green), var(--hp-gold));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* NOVO ESTILO: Estilização da data */
-.anniversary-date {
-    font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
-    color: var(--bio-green); /* Cor verde DNA para destaque */
-    margin-top: -10px; 
-    margin-bottom: 25px;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(46, 204, 113, 0.6); /* Sombra suave */
-}
-
-.message {
-    font-size: 1.4rem;
-    line-height: 1.6;
-    background: rgba(0, 0, 0, 0.4);
-    /* ... (restante do message style) ... */
-}
-
-/* ... (As keyframes floatText, glowPulse, rainbowFill e subtleShake permanecem as mesmas) ... */
-
-/* ... (O restante do CSS, incluindo a media query) ... */
